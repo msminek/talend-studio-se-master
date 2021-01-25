@@ -1,12 +1,18 @@
 #!/bin/bash
 
 git_talend=https://github.com/Talend/
-git_tag=none
+
+if [ -z "$1" ]; then
+  git_tag=none
+else
+  git_tag=$1
+fi
 
 function tgits () {
+  echo "* start tgits($1, $2)"
   if [ -e $1 ]; then
     pushd $1
-      git pull origin master
+      git fetch --all --tags
     popd
   else
     git submodule add ${git_talend}$1.git
@@ -16,11 +22,19 @@ function tgits () {
     if [ "none" == "$2" ]; then
       echo -e "" # nop
     elif [ "reset" == "$2" ]; then
-      git reset --hard
-      git checkout -
+      echo "* checkout -"
+      pushd $1
+        git reset --hard
+        git checkout -
+      popd
     else
-      git reset --hard
-      git checkout refs/tags/$2
+      echo "* checkout $2"
+      pushd $1
+        git checkout tags/$2
+        if [ $? != 0 ]; then
+          git tag -l 'release/*'
+        fi
+      popd
     fi
   fi
 }
