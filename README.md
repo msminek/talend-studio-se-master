@@ -91,7 +91,7 @@ Especialy v5 or older versions, its source repository was on the subversion. I c
 
 ### Which version can I build ?
 
-That I want to know. When the version 6 I could build with the repositories.
+That I want to know. When the version 7.2 or 7.3, I could build snapshot version with the repositories.
 
 ### Where can I found the TOS zip file after build ?
 
