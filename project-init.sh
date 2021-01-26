@@ -24,8 +24,8 @@ function tgits () {
     elif [ "reset" == "$2" ]; then
       echo "* checkout -"
       pushd $1
-        git reset --hard
         git checkout -
+        git reset --hard
       popd
     else
       echo "* checkout $2"
@@ -33,13 +33,19 @@ function tgits () {
         git checkout tags/$2
         if [ $? != 0 ]; then
           git tag -l 'release/*'
+          exit 1
         fi
+        git reset --hard
       popd
     fi
   fi
 }
 
 tgits studio-se-master ${git_tag}
+pushd studio-se-master/talend.studio.parent.pom
+  mvn clean
+popd
+
 tgits tbd-studio-se ${git_tag}
 tgits tcommon-studio-se ${git_tag}
 tgits tdi-studio-se ${git_tag}

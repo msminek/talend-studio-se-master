@@ -7,17 +7,30 @@ The original GitHub project [studio-se-master](https://github.com/Talend/studio-
 ## Features
 
 - Simply build Talend Open Studio(s).
-  - A current stable version is release/7.3.1
+
+- Successfully builds:
+  - 7.2.1 snapshot(master) from Feb 2019 - June 2019
+  - 7.3.1 snapshot(master) at Oct 2019
+- Failed to builds:
+  - tags/release/7.3.1 at Jan 2021
+  - tags/release/7.4.1M6 at Jan 2021
 
 ## Getting started
 
 1. Prepare git and bash environment.
 
-    On your Windows 10, [Git for Windows](https://gitforwindows.org/) should be easy because you will maybe use git command later :). For more detail, [SDKMAN! installation page](https://sdkman.io/install) would be help you.
+    With Linux, you simply install git with your package manager.
+
+    If you are on Windows 10, [Git for Windows](https://gitforwindows.org/) should be easy because you will maybe use git command later :). For more detail, [SDKMAN! installation page](https://sdkman.io/install) would be help you. And I also recommend [chocolatey package manager](https://chocolatey.org/) for beginners.
+
+    ```shell-session
+    @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+    choco install -y git zip
+    ```
 
 1. Install build tool chain.
 
-    [SDKMAN!](https://sdkman.io/) should be easy for all.
+    [SDKMAN!](https://sdkman.io/) should be easy for all. Because it supports both Windows and Linux environment.
 
     ```shell-session
     curl -s "https://get.sdkman.io" | bash
@@ -55,6 +68,39 @@ The original GitHub project [studio-se-master](https://github.com/Talend/studio-
     ```shell-session
     ./build-tos.sh
     ```
+
+    A build logs are output at [the logs folder](logs/).
+
+## ToDo
+
+### Too long file names for the Windows platform
+
+It might be cause something trouble, I doubt. I will build at a linux container for the reason.
+
+## FAQ
+
+### I cannot build the current milestone build(s)
+
+The p2 repository for the milestone build is a Talend private repository. So we cannot build.
+
+### I cannot build the old release version(s)
+
+Sometime we cannot build the old version Talend Open Studio(s).
+
+Especialy v5 or older versions, its source repository was on the subversion. I could not build any Talend Open Studio(s) with the subversion repository.
+
+### Which version can I build ?
+
+That I want to know. When the version 6 I could build with the repositories.
+
+### Where can I found the TOS zip file after build ?
+
+It might be in the build floders something like these:
+
+- studio-se-master/build/talend.studio.tos.bd.product/target/products/
+- studio-se-master/build/talend.studio.tos.di.product/target/products/
+- studio-se-master/build/talend.studio.tos.dq.product/target/products/
+- studio-se-master/build/talend.studio.tos.esb.product/target/products/
 
 ## Author
 
